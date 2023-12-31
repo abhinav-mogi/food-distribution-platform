@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 import axios from "axios";
 import "./Signup.css";
 
+
+
 const Signup = () => {
+  const [show, setShow] = useState(false);
+
+const handleClose = () => setShow(false);
+const handleShow = () => setShow(true);
+useEffect(() => {
+  console.log("high");
+}, [show]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     number: "",
   });
+  
 
   const navigate = useNavigate();
 
@@ -28,11 +40,13 @@ const Signup = () => {
       number: formData.number,
     };
     try {
-      axios.post("http://localhost:3000/signup", data).then((response) => {
-        console.log(response);
+      await axios.post("http://localhost:3000/signup", data).then((response) => {
+        console.log(response); 
       });
-
-      navigate("/login"); // redirect to home page
+      handleShow();
+      navigate("/Login");
+      
+         // redirect to home page
     } catch (err) {
       console.error(err);
     }
@@ -41,11 +55,13 @@ const Signup = () => {
   return (
     <div class="signup_container">
       <div class="signup_main-img"></div>
+      
 
       <div class="signup_wrapper">
         <form>
           <h1>Sign-Up</h1>
           <p>Create your free account on Food-donation</p>
+           
 
           <input
             type="text"
@@ -64,7 +80,7 @@ const Signup = () => {
             id="email"
           />
           <input
-            type="text"
+            type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
@@ -83,7 +99,6 @@ const Signup = () => {
           <button type="submit" id="signup-btn" onClick={handleSubmit}>
             Sign Up
           </button>
-
           <div class="login">
             <p>Already have an account?</p>
             <Link to={"/login"}>
@@ -92,6 +107,8 @@ const Signup = () => {
           </div>
         </form>
       </div>
+
+
     </div>
   );
 };

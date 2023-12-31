@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {
-  BrowserRouter,
+  BrowserRouter,createBrowserRouter,RouterProvider,
   Router,
   Routes,
   Route,
@@ -13,9 +13,11 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Layout from "./dashboard/Layout";
 import Navbar from "./components/Navbar/Navbar";
-
 import Profile from "./dashboard/Profile";
 import Food from "./dashboard/Food";
+import RootLayout from "./pages/RootLayout";
+import Contactus from "./components/ContactUs/Contactus";
+import AboutUs from "./components/About Us/AboutUs";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -27,15 +29,19 @@ function App() {
   }, [pathname]);
   return (
     <>
-      {!pathname.includes("/login") &&
+      {/* {!pathname.includes("/login") &&
         !pathname.includes("/signup") &&
-        !pathname.includes("/dashboard") && <Navbar token={token} />}
+        !pathname.includes("/dashboard") && <Navbar token={token} />} */}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/donation" element={<FoodDonation />} />
+        <Route path="/" element={<Home />} >
+          <Route path="/" element={<RootLayout />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/contactus" element={<Contactus/>}/>
+          <Route path="/donation" element={<FoodDonation />} />
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
 
         {token ? (
           <Route element={<Layout />}>
