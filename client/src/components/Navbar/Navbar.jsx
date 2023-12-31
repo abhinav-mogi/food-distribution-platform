@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
+import Home from "../../pages/Home";
 
 const Navbar = () => {
   const { id } = useParams();
@@ -24,24 +25,24 @@ const Navbar = () => {
       <div className={showMenu ? "nav-items mobile-menu-link" : "nav-items"}>
         <ul>
           <li>
-            <a
+            <Link to='/'
               style={{
                 fontSize: "1.5rem",
               }}
               href="#"
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               style={{
                 fontSize: "1.5rem",
               }}
-              href="#"
+              to="/aboutus"
             >
               About Us
-            </a>
+            </Link>
           </li>
           <li>
             <a
@@ -49,19 +50,20 @@ const Navbar = () => {
                 fontSize: "1.5rem",
               }}
               href="#"
+              
             >
               Our Work
             </a>
           </li>
           <li>
-            <a
+            <Link
               style={{
                 fontSize: "1.5rem",
               }}
-              href="#"
+              to="/contactus"
             >
               Contact Us
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

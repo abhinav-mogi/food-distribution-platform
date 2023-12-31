@@ -4,6 +4,7 @@ import allFoodRoutes from './routes/allfood.routes.js';
 import userRoutes from './routes/user.routes.js';
 import bodyParser from 'body-parser';
 import connectDB from './config/mongo.js';
+import adminRoutes from './routes/admin.routes.js'
 import cors from 'cors';
 
 import express from 'express';
@@ -15,7 +16,7 @@ app.use(cors());
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
-
+// app.use('/',adminRoutes);
 app.use('/', authRoutes);
 app.use('/', foodDonationRoutes);
 app.use('/', allFoodRoutes);

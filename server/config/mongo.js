@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = 'mongodb+srv://nitinshabad:nitinshabad@cluster0.limoxku.mongodb.net/';
+const MONGODB_URI = 'mongodb://127.0.0.1:27017';
 
 const connectDB = async () => {
     try {

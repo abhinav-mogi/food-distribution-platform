@@ -9,6 +9,18 @@ router.get('/:userId', (req, res) => {
         .then((user) => res.json(user))
         .catch((err) => res.status(400).json('Error: ' + err));
 });
+router.get('/findbyemail/:email', (req, res) => {
+    const userEmail = req.params.email;
+    User.findOne({ email: userEmail })
+        .then((user) => {
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            res.json(user);
+        })
+        .catch((err) => res.status(400).json({ message: 'Error: ' + err }));
+});
+
 
 router.put("/update", async (req, res) => {
     const { id, name, number, email } = req.body;
